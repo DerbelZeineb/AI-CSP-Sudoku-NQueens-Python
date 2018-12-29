@@ -1,3 +1,5 @@
+import time
+
 from lib.backtracking import backtracking_search, forward_checking, mrv
 from lib.constraint_propagation import AC3, implementAC3
 from lib.csp import CSP
@@ -102,11 +104,19 @@ if __name__== "__main__":
 
     # easy1 = '...28.94.1.4...7......156.....8..57.4.......8.68..9.....196......5...8.3.43.28...'
     harder1 = statement
+    e = Sudoku(harder1)
+    e.display(e.infer_assignment())
+    AC3(e);
+    start_time = time.time()
+    backtracking_search(e, select_unassigned_variable=mrv, inference=forward_checking) is not None
+    end_time = time.time()
+    print(end_time - start_time)
+    e.display(e.infer_assignment())
+
+    start_time = time.time()
     h = Sudoku(harder1)
     h.display(h.infer_assignment())
-    AC3(h)
+    backtracking_search(h, select_unassigned_variable=mrv, inference=forward_checking) is not None
+    end_time = time.time()
+    print(end_time - start_time)
     h.display(h.infer_assignment())
-    # h = Sudoku(harder1)
-    # h.display(h.infer_assignment())
-    # backtracking_search(h, select_unassigned_variable=mrv, inference=forward_checking) is not None
-    # h.display(h.infer_assignment())

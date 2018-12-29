@@ -1,7 +1,7 @@
 from __future__ import print_function
 import time
 import copy
-from lib.backtracking import backtracking_search, no_inference, forward_checking
+from lib.backtracking import backtracking_search, no_inference, forward_checking, mrv
 from lib.csp import CSP
 
 
@@ -54,7 +54,7 @@ class NQueensCSP(CSP):
 
         return c_row and c_diag_1 and c_diag_2
             
-if __name__== "__main__":
+def run():
     # Solve n queens.
     nb=0
     nb=int(input('Enter the queens''s number'))
@@ -70,7 +70,7 @@ if __name__== "__main__":
 
     # Backtracking with forward checking
     start_time = time.time()
-    solution = backtracking_search(n_queens, inference=forward_checking)
+    solution = backtracking_search(n_queens,select_unassigned_variable=mrv, inference=forward_checking)
     end_time = time.time()
     print(solution)
     print(end_time - start_time)
